@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/MHC/Desktop/edTechPrj/EdTechPrj/app/page.tsx"],"sourcesContent":["import Link from 'next/link'\r\n\r\nexport default function Home() {\r\n  return (\r\n    <div style={{ padding: '50px', fontFamily: 'sans-serif' }}>\r\n      <h1>Chào mừng đến với EdTech Project</h1>\r\n      <p>Trang web đã chạy thành công!</p>\r\n      \r\n      <div style={{ marginTop: '20px' }}>\r\n        <Link href=\"/login\" style={{ color: 'blue', textDecoration: 'underline' }}>\r\n          Bấm vào đây để đến trang Đăng nhập\r\n        </Link>\r\n      </div>\r\n    </div>\r\n  )\r\n}"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACE,8OAAC;QAAI,OAAO;YAAE,SAAS;YAAQ,YAAY;QAAa;;0BACtD,8OAAC;0BAAG;;;;;;0BACJ,8OAAC;0BAAE;;;;;;0BAEH,8OAAC;gBAAI,OAAO;oBAAE,WAAW;gBAAO;0BAC9B,cAAA,8OAAC,0LAAI;oBAAC,MAAK;oBAAS,OAAO;wBAAE,OAAO;wBAAQ,gBAAgB;oBAAY;8BAAG;;;;;;;;;;;;;;;;;AAMnF"}}]
+}
