@@ -1,3 +1,6 @@
+import "./globals.css"; // <-- QUAN TRỌNG: Dòng này kích hoạt Tailwind cho toàn bộ dự án
+
+
 export const metadata = {
   title: 'EdTech Project',
   description: 'Du an hoc tap',
