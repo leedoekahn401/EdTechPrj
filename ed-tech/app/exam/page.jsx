@@ -1,6 +1,7 @@
 'use client'
 
-
+import Draggable from 'react-draggable';
+import DesmosCalculator from "./components/DesmosCalc.js"
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
     Clock, 
@@ -111,6 +112,10 @@ const ExamUI = () => {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [eliminatedOptions, setEliminatedOptions] = useState({});
     const [isNavModalOpen, setIsNavModalOpen] = useState(false);
+    const [showCalculator, setShowCalculator] = useState(false); // Trạng thái bật tắt máy tính
+    const calculatorRef = useRef(null); // <--- THÊM DÒNG NÀY (Đây là cái mỏ neo)
+
+
     
     // Highlight
     const [highlights, setHighlights] = useState([]);
@@ -344,10 +349,16 @@ const ExamUI = () => {
                                 <span className="text-[10px] font-medium -mt-1">Annotate</span>
                             </Button>
 
-                            <Button variant="ghost" className="flex-col h-14 px-2 hover:bg-gray-100 dark:hover:bg-gray-800 gap-0 text-gray-600 dark:text-gray-400">
+                                                   {/* --- TÌM ĐOẠN NÚT TOOLS CŨ VÀ THAY BẰNG ĐOẠN NÀY --- */}
+                            <Button 
+                                variant="ghost" 
+                                className={`flex-col h-14 px-2 hover:bg-gray-100 dark:hover:bg-gray-800 gap-0 ${showCalculator ? 'bg-gray-100 dark:bg-gray-800 text-blue-600' : 'text-gray-600 dark:text-gray-400'}`}
+                                onClick={() => setShowCalculator(!showCalculator)} // Bấm để bật/tắt
+                            >
                                 <Calculator className="w-5 h-5 mb-1" />
                                 <span className="text-[10px] font-medium">Tools</span>
                             </Button>
+                            
 
                             <Button 
                                 variant="ghost" 
@@ -548,6 +559,42 @@ const ExamUI = () => {
                     </div>
                 </footer>
 
+     {showCalculator && (
+    <Draggable handle=".calculator-handle" bounds="body" nodeRef={calculatorRef}>
+        <div 
+            ref={calculatorRef} 
+            className="fixed top-20 left-20 z-50 flex flex-col bg-white dark:bg-[#1e1e1e] rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 w-[700px] h-[500px] overflow-hidden resize min-h-[300px] min-w-[300px]"
+        >
+            
+            {/* Header: Thanh tiêu đề để cầm kéo */}
+            <div className="calculator-handle h-10 bg-gray-100 dark:bg-[#2d2d2d] border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-4 cursor-move select-none shrink-0">
+                <div className="flex items-center gap-2">
+                    <Calculator className="w-4 h-4 text-blue-600" />
+                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Desmos Graphing Calculator</span>
+                </div>
+                {/* Nút đóng */}
+                <button 
+                    onClick={() => setShowCalculator(false)}
+                    className="p-1 hover:bg-red-100 hover:text-red-600 rounded text-gray-500 dark:text-gray-400 transition-colors"
+                >
+                    <X className="w-4 h-4" />
+                </button>
+            </div>
+
+            {/* Content: Đã đổi link sang bản Testing */}
+            <div className="flex-grow w-full h-full bg-white relative">
+               <DesmosCalculator />
+                {/* Lớp phủ trong suốt ở cạnh trên để chuột không bị kẹt vào iframe khi kéo header */}
+                <div className="absolute top-0 left-0 w-full h-2 pointer-events-none"></div>
+            </div>
+
+        </div>
+    </Draggable>
+)}
+            
+            
+            
+            
             </div>
         </div>
     );
